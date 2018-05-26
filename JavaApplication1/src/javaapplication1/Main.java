@@ -15,10 +15,22 @@ public class Main {
         int tmp2[] = {0,0,0,1,1,1};
         int tmp3[] = {1,1,1,1,1,1};
         
-        Chromosom.arr.add(new Chromosom(tmp0));
-        Chromosom.arr.add(new Chromosom(tmp1));
-        Chromosom.arr.add(new Chromosom(tmp2));
-        Chromosom.arr.add(new Chromosom(tmp3));
+        Chromosom.cur.add(new Chromosom(tmp0));
+        Chromosom.cur.add(new Chromosom(tmp1));
+        Chromosom.cur.add(new Chromosom(tmp2));
+        Chromosom.cur.add(new Chromosom(tmp3));
+        
+        
+        int tmp4[] = {1,0,1,0,1,0};
+        int tmp5[] = {1,1,1,1,0,1};
+        int tmp6[] = {0,0,0,1,1,1};
+        int tmp7[] = {1,1,1,1,1,1};
+        
+        Chromosom.nxt.add(new Chromosom(tmp0));
+        Chromosom.nxt.add(new Chromosom(tmp1));
+        Chromosom.nxt.add(new Chromosom(tmp2));
+        Chromosom.nxt.add(new Chromosom(tmp3));
+        
         
         //---------------------------------------------STANDARD---------------------------------------------
         try {

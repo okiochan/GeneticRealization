@@ -10,26 +10,30 @@ public class Main {
     
     public static void main (String args[]) {
         
-        int tmp0[] = {1,0,1,0,1,0};
-        int tmp1[] = {1,1,1,1,0,1};
-        int tmp2[] = {0,0,0,1,1,1};
-        int tmp3[] = {1,1,1,1,1,1};
+        States s = ProblemReader.Read("D:\\temp\\coding\\masha_genetic\\GeneticRealization\\example_input.txt");
+        Chromosom.cur = s.states.get(0);
+        Chromosom.nxt = s.states.get(1);
         
-        Chromosom.cur.add(new Chromosom(tmp0, -1, -1));
-        Chromosom.cur.add(new Chromosom(tmp1,  -1, -1));
-        Chromosom.cur.add(new Chromosom(tmp2,  -1, -1));
-        Chromosom.cur.add(new Chromosom(tmp3,  -1, -1));
-        
-        
-        int tmp4[] = {1,1,1,0,1,0};
-        int tmp5[] = {0,0,1,1,0,1};
-        int tmp6[] = {0,0,0,1,0,1};
-        int tmp7[] = {0,0,0,0,0,0};
-        
-        Chromosom.nxt.add(new Chromosom(tmp4,0,3));
-        Chromosom.nxt.add(new Chromosom(tmp5,-1,-1));
-        Chromosom.nxt.add(new Chromosom(tmp6,0,-1));
-        Chromosom.nxt.add(new Chromosom(tmp7,1,3));
+//        int tmp0[] = {1,0,1,0,1,0};
+//        int tmp1[] = {1,1,1,1,0,1};
+//        int tmp2[] = {0,0,0,1,1,1};
+//        int tmp3[] = {1,1,1,1,1,1};
+//        
+//        Chromosom.cur.add(new Chromosom(tmp0, -1, -1));
+//        Chromosom.cur.add(new Chromosom(tmp1,  -1, -1));
+//        Chromosom.cur.add(new Chromosom(tmp2,  -1, -1));
+//        Chromosom.cur.add(new Chromosom(tmp3,  -1, -1));
+//        
+//        
+//        int tmp4[] = {1,1,1,0,1,0};
+//        int tmp5[] = {0,0,1,1,0,1};
+//        int tmp6[] = {0,0,0,1,0,1};
+//        int tmp7[] = {0,0,0,0,0,0};
+//        
+//        Chromosom.nxt.add(new Chromosom(tmp4,0,3));
+//        Chromosom.nxt.add(new Chromosom(tmp5,-1,-1));
+//        Chromosom.nxt.add(new Chromosom(tmp6,0,-1));
+//        Chromosom.nxt.add(new Chromosom(tmp7,1,3));
         
         
         //---------------------------------------------STANDARD---------------------------------------------

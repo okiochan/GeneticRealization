@@ -67,6 +67,22 @@ public class Chromosom {
         return size*v.length; 
     }
 
+    public int getMom() {
+        return mom;
+    }
+
+    public void setMom(int mom) {
+        this.mom = mom;
+    }
+
+    public int getDad() {
+        return dad;
+    }
+
+    public void setDad(int dad) {
+        this.dad = dad;
+    }
+
     
     private static int size = 30;
     

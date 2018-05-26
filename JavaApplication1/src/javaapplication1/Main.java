@@ -4,12 +4,23 @@
  * and open the template in the editor.
  */
 package javaapplication1;
-import javax.swing.JFrame;
+import java.util.ArrayList;
 
 public class Main {
     
     public static void main (String args[]) {
         
+        int tmp0[] = {1,0,1,0,1,0};
+        int tmp1[] = {1,1,1,1,0,1};
+        int tmp2[] = {0,0,0,1,1,1};
+        int tmp3[] = {1,1,1,1,1,1};
+        
+        Chromosom.arr.add(new Chromosom(tmp0));
+        Chromosom.arr.add(new Chromosom(tmp1));
+        Chromosom.arr.add(new Chromosom(tmp2));
+        Chromosom.arr.add(new Chromosom(tmp3));
+        
+        //---------------------------------------------STANDARD---------------------------------------------
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {

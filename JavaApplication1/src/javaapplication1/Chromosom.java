@@ -7,18 +7,37 @@ import java.util.ArrayList;
 
 public class Chromosom {
     
-    Chromosom (ArrayList<Integer> arr1) {
-        arr = (ArrayList<Integer>)arr1.clone();
+    public static  ArrayList <Chromosom> arr = new ArrayList<>();
+    
+    Chromosom (int arr1[]) {
+        v = arr1.clone();
     }
     
-    public void Draw(Graphics2D g) {
+    public void Draw(Graphics2D g, int x, int y) {
         
+        for (int i=0; i< v.length; i++) {
+            if(v[i] == 0) {
+                g.setColor(Color.pink);
+            } else {
+                g.setColor(Color.gray);
+            }
+            g.fillOval(x, y+(i*size), size, size);
+        }
         
-        
-        g.setColor(Color.red);
-        
-        g.fillOval(50, 50, 100, 100);
     }
     
-    private ArrayList <Integer> arr;
+    public static void DrawAll(Graphics2D g, int x, int y) {
+        
+        for (int i =0; i < Chromosom.arr.size(); i++) {
+            Chromosom.arr.get(i).Draw(g, x, y);
+            x += Chromosom.arr.get(i).size+10;
+        }
+    }
+    
+    public int getLength() {
+        return size*v.length; 
+    }
+    
+    private int v[];
+    private int size = 20;
 }

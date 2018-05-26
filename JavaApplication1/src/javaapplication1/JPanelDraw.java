@@ -5,9 +5,9 @@
  */
 package javaapplication1;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 
 /**
@@ -26,8 +26,12 @@ public class JPanelDraw extends javax.swing.JPanel {
     protected void paintComponent(Graphics g) {
         BufferedImage bufferedImage = new BufferedImage(W, H, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2d = bufferedImage.createGraphics();
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
         
         g2d.fillRect(0, 0, W, H);
+        
+        Chromosom.DrawAll(g2d, 10, 20);
+        
 
         Graphics2D g2dComponent = (Graphics2D) g;
         g2dComponent.drawImage(bufferedImage, null, 0, 0);  

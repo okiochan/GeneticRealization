@@ -30,7 +30,7 @@ public class JPanelDraw extends javax.swing.JPanel {
         
         g2d.fillRect(0, 0, W, H);
         
-        Chromosom.DrawAll(g2d, 10, 20);
+        Chromosom.drawAll(g2d, 10, 20);
         
 
         Graphics2D g2dComponent = (Graphics2D) g;

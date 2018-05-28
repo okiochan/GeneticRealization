@@ -22,7 +22,17 @@ public class Logic {
     
     public static void loadNextStep(JPanel toRedraw) {
         System.out.println("hello");
+        if(step >= s.states.size()) return;
         step++;
+        cur = s.states.get(step);
+        nxt = s.states.get(step+1);
+        toRedraw.repaint();
+    }
+    
+    public static void loadPrevStep(JPanel toRedraw) {
+        System.out.println("world");
+        if(step - 1 < 0) return;
+        step--;
         cur = s.states.get(step);
         nxt = s.states.get(step+1);
         toRedraw.repaint();

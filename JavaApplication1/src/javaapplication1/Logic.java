@@ -17,6 +17,7 @@ public class Logic {
         States s = ProblemReader.Read("..\\example_input.txt");
         cur = s.states.get(0);
         nxt = s.states.get(1);
+        System.out.println(s.states.size());
     }
     
 }

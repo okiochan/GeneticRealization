@@ -19,7 +19,7 @@ public class DrawMethods {
         
     public static void drawLine(Graphics2D g, int x, int y, int X, int Y) {
         g.setColor(Color.green);
-        g.setStroke(new BasicStroke(3));
+        g.setStroke(new BasicStroke(2));
         g.drawLine(X, Y, x, y);
     }
     

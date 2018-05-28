@@ -6,18 +6,28 @@
 package javaapplication1;
 
 import java.util.ArrayList;
+import javax.swing.JPanel;
 
 public class Logic {
     
-    public static ArrayList<Chromosom> cur = new ArrayList<>();
-    public static ArrayList<Chromosom> nxt = new ArrayList<>();
+    public static ArrayList<Chromosom> cur ;
+    public static ArrayList<Chromosom> nxt ;
     
     
     Logic() {
-        States s = ProblemReader.Read("..\\example_input.txt");
+        s = ProblemReader.Read("..\\example_input.txt");
         cur = s.states.get(0);
         nxt = s.states.get(1);
-        System.out.println(s.states.size());
     }
     
+    public static void loadNextStep(JPanel toRedraw) {
+        System.out.println("hello");
+        step++;
+        cur = s.states.get(step);
+        nxt = s.states.get(step+1);
+        toRedraw.repaint();
+    }
+    
+    private static int step = 0;
+    private static States s;
 }

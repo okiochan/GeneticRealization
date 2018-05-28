@@ -16,9 +16,9 @@ import java.util.ArrayList;
  */
 public class DrawMethods {
     
-        
-    public static void drawLine(Graphics2D g, int x, int y, int X, int Y) {
-        g.setColor(Color.green);
+    
+    public static void drawLine(Graphics2D g, int x, int y, int X, int Y, Color c) {
+        g.setColor(c);
         g.setStroke(new BasicStroke(3));
         g.drawLine(X, Y, x, y);
     }
@@ -38,14 +38,14 @@ public class DrawMethods {
             if(id != -1) {
                 int xp = X+(nxt.get(i).getSize()+10)*id;
                 int yp = Y+nxt.get(id).getYLength();
-                DrawMethods.drawLine(g, x+nxt.get(i).getSize()/2, y, xp+nxt.get(i).getSize()/2, yp); 
+                DrawMethods.drawLine(g, x+nxt.get(i).getSize()/2, y, xp+nxt.get(i).getSize()/2, yp, Color.green); 
             }
 
             id = nxt.get(i).getDad();
             if(id != -1) {
                 int xp = X+(nxt.get(i).getSize()+10)*id;
                 int yp = Y+nxt.get(i).getYLength();
-                DrawMethods.drawLine(g, x+nxt.get(i).getSize()/2, y, xp+nxt.get(i).getSize()/2, yp); 
+                DrawMethods.drawLine(g, x+nxt.get(i).getSize()/2, y, xp+nxt.get(i).getSize()/2, yp, Color.orange); 
             }
 
         nxt.get(i).draw(g, x, y);

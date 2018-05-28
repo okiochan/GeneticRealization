@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import scipy.linalg
 import dataBuilder as data
 import random
- 
+
 #-----------------------------------------Linear reg----------------------
 #generate true X
 def PolynomialFitures2(X):
@@ -15,14 +15,14 @@ def PolynomialFitures2(X):
         for j in range(i,n):
             res.append(X[...,i] * X[...,j])
     return np.array(res).T
- 
+
 def Linear(X, y, reg=1e-8):
     l, n = X.shape
     return np.linalg.solve(X.T.dot(X) + reg * np.eye(n),X.T.dot(y))
- 
+
 def SSE(y_hat, y):
     return ((y_hat-y)**2).sum()/y.shape[0]
- 
+
 def LinearError(X,y,take=20):
     l = y.shape[0]
     np.random.seed(123)
@@ -36,9 +36,19 @@ def LinearError(X,y,take=20):
     for i in range(X_test.shape[0]):
         y_hat.append(np.sum(w * X_test[i,...]))
     return SSE(y_hat, y_test)
- 
+
 #-----------------------------------------Genetic---------
- 
+
+def dumpChromos(f, c):
+    f.write("{}\n".format(len(c)))
+    for i in c:
+        f.write("{}\n".format(i))
+
+def dumpEdges(f, e):    
+    f.write("{}\n".format(len(e)))
+    for e in e:
+        f.write("{} {}\n".format(e[0], e[1]))
+
 class Chromosom:
     def __init__(self, mask, err):
         self.mask = mask
@@ -47,56 +57,65 @@ class Chromosom:
         return self.err
     def Print(self):
         print(self.mask,"  ",self.err)
- 
+    def __str__(self):
+        res = ""
+        for i in self.mask:
+            res += "{}".format(int(i))
+        return res
+
 def randMask(n) :
     used = np.zeros(n)
     for i in range(n):
         used[i] = random.randint(0,1)
     return used
- 
+
 def getFeatures(X,mask):
     return X[...,np.array(mask,dtype=np.bool)]
- 
+
 # Error = ERROR + count ONES from mask
 def Loss(X, y, mask):
     newX = getFeatures(X,mask)
     if np.sum(mask) == 0: return 1000
     return ( LinearError(newX,y) + mask.sum() / 100)
- 
+
 def mutation(mask):
     n = len(mask)
     pos = random.randint(0,n-1)
     mask[pos] = 1-mask[pos]
     return mask
- 
+
 def cross(m1, m2):
     n = len(m1)
     take = random.randint(0,n-1)
     M1 = np.concatenate( (m1[:take],m2[take:]),axis=0 )
     M2 = np.concatenate( (m2[:take],m1[take:]),axis=0 )
     return M1, M2
- 
+
 def getChromId(P, p):
     sum = 0; k = len(P)
     for i in range (k):
         sum += P[i]
         if p <= sum : return i
     return (k-1)
- 
+
 #k - gen at first stage, even; elite - go without change
 def Genetic(X,y, k=60, mutate_prob = 0.1, elite = 2):
     l,n = X.shape
     bestMask = None; bestQ = -1
     allQ=[]
- 
+
     chroms = []
     for i in range(k):
         mask = randMask(n)
         chroms.append( Chromosom(mask, Loss(X,y,mask)) )
- 
+
+    f = open("res.txt", "w")
+
     for step in range(200):
         chroms = sorted(chroms, key=lambda x: x.val())
- 
+
+        dumpChromos(f,chroms)
+
         #prepeare Fitness selection
         P = np.zeros(k); sum = 0;
         maxv = 0
@@ -106,12 +125,13 @@ def Genetic(X,y, k=60, mutate_prob = 0.1, elite = 2):
         #norm P
         for i in range(k):
             P[i] = (maxv - chroms[i].err)/sum
- 
+
         #get new chromosomes
         Next = []
         for i in range (elite):
             Next.append(chroms[i])
- 
+
+        edges = []
         while len(Next) < k:
             #select 2 random chromes
             p = random.random()
@@ -119,7 +139,11 @@ def Genetic(X,y, k=60, mutate_prob = 0.1, elite = 2):
             p = random.random()
             pos2 = getChromId(P, p)
             if pos1 == pos2 : pos2 = (pos2 + 1)%k
- 
+
+            now = len(Next)
+            edges.append((pos1,pos2))
+            edges.append((pos1,pos2))
+
             #cros them
             m1, m2 = cross(chroms[pos1].mask,chroms[pos2].mask)
             #make mutaton
@@ -131,9 +155,11 @@ def Genetic(X,y, k=60, mutate_prob = 0.1, elite = 2):
             b = Chromosom(m2, -1)
             Next.append(a)
             Next.append(b)
- 
+
+        dumpEdges(f,edges)
+
         chroms = Next
- 
+
         #get best error, set chroms error
         err = -1; mask = None
         for i in range (k):
@@ -141,7 +167,7 @@ def Genetic(X,y, k=60, mutate_prob = 0.1, elite = 2):
             if err == -1 or chroms[i].err < err :
                 err = chroms[i].err
                 mask = chroms[i].mask
- 
+
         if step%50 == 0 :
             print(err)
             # print(Loss(X,y,np.ones(X.shape[1])))
@@ -149,22 +175,25 @@ def Genetic(X,y, k=60, mutate_prob = 0.1, elite = 2):
             # for i in chroms:
                 # print(i.mask, i.err)
             # print(k)
- 
- 
+
+
         if bestQ == -1 or err < bestQ :
             bestQ = err; bestMask = mask
             print("\nI got new set")
             print("err ",bestQ)
             print("mask ",mask)
- 
+
+    dumpChromos(f,chroms)
+    f.close()
+
     return bestMask, bestQ
- 
+
 #X,y = data.DataFactory().createData('forGenetic')
 X,y,names = data.DataFactory().createData('boston')
- 
+
 mask, Q = Genetic(X,y)
 print("final error ", (Q - mask.sum()))
- 
+
 E = []
 for i in range(len(mask)):
     if mask[i] == 1 :

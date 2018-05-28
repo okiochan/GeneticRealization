@@ -6,38 +6,45 @@
 package javaapplication1;
 
 import java.util.ArrayList;
-import javax.swing.JPanel;
+import javax.swing.JFrame;
 
 public class Logic {
-    
-    public static ArrayList<Chromosom> cur ;
-    public static ArrayList<Chromosom> nxt ;
-    
-    
+
+    public static ArrayList<Chromosom> cur;
+    public static ArrayList<Chromosom> nxt;
+
     Logic() {
         s = ProblemReader.Read("..\\example_input.txt");
         cur = s.states.get(0);
         nxt = s.states.get(1);
     }
-    
-    public static void loadNextStep(JPanel toRedraw) {
-        System.out.println("hello");
-        if(step >= s.states.size()) return;
+
+    public static void loadNextStep(JFrame frame) {
+        Drawer d = (Drawer) frame;
+
+        if (step >= s.states.size()) {
+            return;
+        }
         step++;
         cur = s.states.get(step);
-        nxt = s.states.get(step+1);
-        toRedraw.repaint();
+        nxt = s.states.get(step + 1);
+        d.getCountdownLabel().setText(step + "/" + s.states.size());
+        d.getDrawPanel().repaint();
     }
-    
-    public static void loadPrevStep(JPanel toRedraw) {
-        System.out.println("world");
-        if(step - 1 < 0) return;
+
+    public static void loadPrevStep(JFrame frame) {
+        Drawer d = (Drawer) frame;
+
+        if (step - 1 < 0) {
+            return;
+        }
         step--;
         cur = s.states.get(step);
-        nxt = s.states.get(step+1);
-        toRedraw.repaint();
+        nxt = s.states.get(step + 1);
+        d.getCountdownLabel().setText(step + "/" + s.states.size());
+        d.getDrawPanel().repaint();
     }
-    
+
     private static int step = 0;
     private static States s;
 }

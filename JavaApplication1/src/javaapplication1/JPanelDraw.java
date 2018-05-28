@@ -57,8 +57,8 @@ public class JPanelDraw extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private int W = 1900;
-    private int H = 850;
+    private int W = 1850;
+    private int H = 600;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

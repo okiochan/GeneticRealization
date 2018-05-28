@@ -16,7 +16,6 @@ import java.util.ArrayList;
  */
 public class DrawMethods {
     
-    
     public static void drawLine(Graphics2D g, int x, int y, int X, int Y, Color c) {
         g.setColor(c);
         g.setStroke(new BasicStroke(3));

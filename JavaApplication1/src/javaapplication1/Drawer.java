@@ -3,6 +3,8 @@ package javaapplication1;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class Drawer extends javax.swing.JFrame {
 
@@ -17,23 +19,24 @@ public class Drawer extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new JPanelDraw();
+        drawPanel = new JPanelDraw();
         butNext = new javax.swing.JButton();
         butPrev = new javax.swing.JButton();
+        countdownLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1900, 700));
+        drawPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        drawPanel.setPreferredSize(new java.awt.Dimension(1900, 700));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout drawPanelLayout = new javax.swing.GroupLayout(drawPanel);
+        drawPanel.setLayout(drawPanelLayout);
+        drawPanelLayout.setHorizontalGroup(
+            drawPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1909, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        drawPanelLayout.setVerticalGroup(
+            drawPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 597, Short.MAX_VALUE)
         );
 
@@ -51,6 +54,8 @@ public class Drawer extends javax.swing.JFrame {
             }
         });
 
+        countdownLabel.setText("0/0");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -62,36 +67,49 @@ public class Drawer extends javax.swing.JFrame {
                         .addComponent(butNext, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
                         .addComponent(butPrev, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1909, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(drawPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1909, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(countdownLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(drawPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(butNext, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(butPrev, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(countdownLabel)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void butNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butNextActionPerformed
-        Logic.loadNextStep(jPanel1);
+        Logic.loadNextStep(this);
     }//GEN-LAST:event_butNextActionPerformed
 
     private void butPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butPrevActionPerformed
-        Logic.loadPrevStep(jPanel1);
+        Logic.loadPrevStep(this);
     }//GEN-LAST:event_butPrevActionPerformed
 
+    public JLabel getCountdownLabel() {
+        return countdownLabel;
+    }
+
+    public JPanel getDrawPanel() {
+        return drawPanel;
+    }
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton butNext;
     private javax.swing.JButton butPrev;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel countdownLabel;
+    private javax.swing.JPanel drawPanel;
     // End of variables declaration//GEN-END:variables
 }

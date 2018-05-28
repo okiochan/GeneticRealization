@@ -10,9 +10,8 @@ public class Main {
     
     public static void main (String args[]) {
         
-        States s = ProblemReader.Read("D:\\temp\\coding\\masha_genetic\\GeneticRealization\\example_input.txt");
-        Chromosom.cur = s.states.get(0);
-        Chromosom.nxt = s.states.get(1);
+        
+        new Logic();
         
 //        int tmp0[] = {1,0,1,0,1,0};
 //        int tmp1[] = {1,1,1,1,0,1};

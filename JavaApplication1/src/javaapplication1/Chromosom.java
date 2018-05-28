@@ -53,5 +53,5 @@ public class Chromosom {
 
     private int v[];
     private int mom, dad;
-    private int size = 30;    
+    private int size = 20;    
 }
